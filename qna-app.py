@@ -26,7 +26,7 @@ st.set_page_config(page_title="Chatbot AI", page_icon="💬", layout="centered")
 st.markdown("""
     <style>
         body {
-            background-color: #181818;  /* Fondo gris muy oscuro */
+            background-color: #e33b0e;  /* Fondo gris muy oscuro */
             color: #F2F2F2;  /* Texto muy claro */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -34,7 +34,7 @@ st.markdown("""
             border: none !important;
             border-radius: 20px;
             padding: 15px;
-            background-color: #2A2A2A;
+            background-color: #664942;
             color: #E6E6E6;
             font-size: 16px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -46,19 +46,19 @@ st.markdown("""
             background-color: #333333;
         }
         .stButton>button {
-            background-color: #00C8B3;  /* Un tono aqua vibrante */
+            background-color: #664942;  /* Color de botón ajustado a #663300 */
             color: #FFFFFF;
             border-radius: 25px;
             padding: 14px 30px;
             font-size: 18px;
             font-weight: bold;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0, 200, 179, 0.3);
+            box-shadow: 0 5px 15px rgba(102, 51, 0, 0.3);
         }
         .stButton>button:hover {
-            background-color: #00A89F;
+            background-color: #362824;  /* Un tono ligeramente más oscuro */
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 200, 179, 0.5);
+            box-shadow: 0 8px 25px rgba(102, 51, 0, 0.5);
         }
         .chat-container {
             background-color: #232323;
@@ -69,7 +69,6 @@ st.markdown("""
             margin: 20px auto;
         }
         h1 {
-            color: #FF79C6;  /* Un rosa fuerte para el título */
             font-size: 36px;
             text-align: center;
             margin-bottom: 20px;
@@ -77,11 +76,22 @@ st.markdown("""
         .stTextInput, .stTextArea {
             margin-bottom: 20px;
         }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
     </style>
 """, unsafe_allow_html=True)
 
-st.title("💬 Chatbot AI")
+# Logo centrado
+st.markdown('<div class="logo-container"><img src="https://www.zarla.com/images/zarla-magia-madera-1x1-2400x2400-20210809-r63gxcvytyvwbmtxxt6m.png?crop=1:1,smart&width=250&dpr=2" width="250" /></div>', unsafe_allow_html=True)
+
+st.title("🪚 Chatbot Carpintería")
+
+# Solicitar al usuario que ingrese su pregunta
 user_input = st.text_input("Escribe tu pregunta aquí:")
+
 if st.button("Enviar"):
     if user_input:
         answer = get_answer(user_input)
