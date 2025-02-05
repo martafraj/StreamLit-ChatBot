@@ -20,7 +20,7 @@ def get_answer(question):
     else:
         return "No se encontró respuesta."
 
-st.set_page_config(page_title="Chatbot AI", page_icon="💬", layout="centered")
+st.set_page_config(page_title="Chatbot AI", page_icon="🪚", layout="centered")
 
 # Estilos CSS para un diseño oscuro completamente nuevo
 st.markdown("""
@@ -87,15 +87,15 @@ st.markdown("""
 # Logo centrado
 st.markdown('<div class="logo-container"><img src="https://www.zarla.com/images/zarla-magia-madera-1x1-2400x2400-20210809-r63gxcvytyvwbmtxxt6m.png?crop=1:1,smart&width=250&dpr=2" width="250" /></div>', unsafe_allow_html=True)
 
-st.title("🪚 Chatbot Carpintería")
+st.title("🪚 Chatbot Carpentry")
 
 # Solicitar al usuario que ingrese su pregunta
-user_input = st.text_input("Escribe tu pregunta aquí:")
+user_input = st.text_input("Write your question here (English only):")
 
 if st.button("Enviar"):
     if user_input:
         answer = get_answer(user_input)
-        st.write(f"**Respuesta:** {answer}")
+        st.write(f"**Response: ** {answer}")
     else:
-        st.warning("Por favor, escribe una pregunta antes de enviar.")
+        st.warning("Please write a question before submitting")
 st.markdown("</div>", unsafe_allow_html=True)
