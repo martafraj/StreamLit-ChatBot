@@ -92,7 +92,7 @@ st.title("🪚 Chatbot Carpentry")
 # Solicitar al usuario que ingrese su pregunta
 user_input = st.text_input("Write your question here (English only):")
 
-if st.button("Enviar"):
+if st.button("Submit"):
     if user_input:
         answer = get_answer(user_input)
         st.write(f"**Response: ** {answer}")
