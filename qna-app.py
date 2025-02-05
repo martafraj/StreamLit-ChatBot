@@ -95,7 +95,7 @@ user_input = st.text_input("Write your question here (English only):")
 if st.button("Submit"):
     if user_input:
         answer = get_answer(user_input)
-        st.write(f"**Response: ** {answer}")
+        st.write(f"{answer}")
     else:
         st.warning("Please write a question before submitting")
 st.markdown("</div>", unsafe_allow_html=True)
