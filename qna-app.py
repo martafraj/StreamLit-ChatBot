@@ -1,0 +1,91 @@
+import streamlit as st
+from dotenv import load_dotenv
+import os
+from azure.core.credentials import AzureKeyCredential
+from azure.ai.language.questionanswering import QuestionAnsweringClient
+
+def get_answer(question):
+    load_dotenv()
+    ai_endpoint = os.getenv('AI_SERVICE_ENDPOINT')
+    ai_key = os.getenv('AI_SERVICE_KEY')
+    ai_project_name = os.getenv('QA_PROJECT_NAME')
+    ai_deployment_name = os.getenv('QA_DEPLOYMENT_NAME')
+
+    credential = AzureKeyCredential(ai_key)
+    ai_client = QuestionAnsweringClient(endpoint=ai_endpoint, credential=credential)
+    response = ai_client.get_answers(question=question, project_name=ai_project_name, deployment_name=ai_deployment_name)
+    
+    if response.answers:
+        return response.answers[0].answer
+    else:
+        return "No se encontró respuesta."
+
+st.set_page_config(page_title="Chatbot AI", page_icon="💬", layout="centered")
+
+# Estilos CSS para un diseño oscuro completamente nuevo
+st.markdown("""
+    <style>
+        body {
+            background-color: #181818;  /* Fondo gris muy oscuro */
+            color: #F2F2F2;  /* Texto muy claro */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .stTextInput, .stTextArea {
+            border: none !important;
+            border-radius: 20px;
+            padding: 15px;
+            background-color: #2A2A2A;
+            color: #E6E6E6;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .stTextInput:focus, .stTextArea:focus {
+            outline: none;
+            box-shadow: 0 0 10px 2px rgba(255, 105, 180, 0.7);
+            background-color: #333333;
+        }
+        .stButton>button {
+            background-color: #00C8B3;  /* Un tono aqua vibrante */
+            color: #FFFFFF;
+            border-radius: 25px;
+            padding: 14px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0, 200, 179, 0.3);
+        }
+        .stButton>button:hover {
+            background-color: #00A89F;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 200, 179, 0.5);
+        }
+        .chat-container {
+            background-color: #232323;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        h1 {
+            color: #FF79C6;  /* Un rosa fuerte para el título */
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .stTextInput, .stTextArea {
+            margin-bottom: 20px;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+st.title("💬 Chatbot AI")
+user_input = st.text_input("Escribe tu pregunta aquí:")
+if st.button("Enviar"):
+    if user_input:
+        answer = get_answer(user_input)
+        st.write(f"**Respuesta:** {answer}")
+    else:
+        st.warning("Por favor, escribe una pregunta antes de enviar.")
+st.markdown("</div>", unsafe_allow_html=True)
